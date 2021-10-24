@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocp-tutorial-deployment
+  labels:
+    app: ocp-tutorial
+spec:
+  selector:
+    matchLabels:
+      app: ocp-tutorial
+  template:
+    metadata:
+      labels:
+        app: ocp-tutorial
+    spec:
+      containers:
+      - name: ocp-tutorial-container
+        image: 172.30.1.1:5000/myproject/ocp-tutorial
+        ports:
+        - containerPort: 9080 
+        
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  name: ocp-tutorial-pipeline
+  labels:
+    app: ocp-tutorial
+spec:
+  resources:
+    requests:
+      cpu: 2000Mi
+      memory: 1G
+  source:
+    git:
+      ref: master
+      uri: "https://github.com/M7md3mmar/ocp-tutorial.git"
+    type: Git
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: Jenkinsfile
+      env:
+      - name: SERVICE_URI
+        value: http://ocp-tutorial.svc:9080       
