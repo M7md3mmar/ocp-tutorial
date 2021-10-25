@@ -2,7 +2,11 @@ def applicationName = "ocp-tutorial";
 
 pipeline{
     agent {
-        label 'maven'
+//         label 'maven'
+        docker {
+            image 'maven:3.8.1-adoptopenjdk-11'
+            args '-v /root/.m2:/root/.m2'
+        }
     }
 
     stages{
@@ -16,7 +20,8 @@ pipeline{
         }
             stage('build') {
                 steps{
-                    sh script: "mvn -DskipTests clean install" 
+                    sh 'mvn -B -DskipTests clean package'
+//                     sh script: "mvn -DskipTests clean install" 
                 }
             }
     }               
