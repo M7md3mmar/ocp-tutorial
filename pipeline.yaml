@@ -1,24 +1,3 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ocp-tutorial-deployment
-  labels:
-    app: ocp-tutorial
-spec:
-  selector:
-    matchLabels:
-      app: ocp-tutorial
-  template:
-    metadata:
-      labels:
-        app: ocp-tutorial
-    spec:
-      containers:
-      - name: ocp-tutorial-container
-        image: 172.30.1.1:5000/myproject/ocp-tutorial
-        ports:
-        - containerPort: 9080 
-        
 kind: BuildConfig
 apiVersion: v1
 metadata:
@@ -41,4 +20,4 @@ spec:
       jenkinsfilePath: Jenkinsfile
       env:
       - name: SERVICE_URI
-        value: http://ocp-tutorial.svc:9080       
+        value: http://ocp-tutorial:9080       
