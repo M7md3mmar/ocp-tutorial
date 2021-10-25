@@ -17,8 +17,7 @@ pipeline{
         }
             stage('build') {
                 steps{
-//                     sh 'mvn -DskipTests clean package'
-                    sh script: "mvn -DskipTests clean install" 
+                    sh script: "mvn -DskipTests clean package -f pom.xml" 
                 }
             }
     }               
