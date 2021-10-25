@@ -2,10 +2,10 @@ def applicationName = "ocp-tutorial";
 
 pipeline{
     agen any
-    tools {
-        maven "MAVEN"
-        jdk "JDK"
-    }
+//     tools {
+//         maven "MAVEN"
+//         jdk "JDK"
+//     }
 
     stages{
          stage ('Initialize') {
