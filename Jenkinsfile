@@ -25,8 +25,9 @@ pipeline{
         stage('Docker Build') {
             agent {dockerfile true }
              steps{            
+                 sh "docker -v"
 //             sh "docker login -u developer -p 3OKSAqBN-94hAYN4Bn2hAzbfzMYKritxoOf92fz9nL8  172.30.1.1:5000"
-               sh " docker image build -t ocp-tutorial ."
+//                sh " docker image build -t ocp-tutorial ."
              }
     }
     }               
